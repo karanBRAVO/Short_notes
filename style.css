@@ -1,0 +1,346 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+/* font-family: 'Poor Story', cursive; */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/* font-family: 'Roboto', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+/* font-family: 'Poppins', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+/* font-family: 'Ubuntu', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+/* font-family: 'Poor Story', cursive; */
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+/* font-family: 'Varela Round', sans-serif; */
+
+/* styling */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+/* utility class */
+.userSelectNone {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+/* add new note division */
+.fixedCont {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.542);
+    position: fixed;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixedInnerCont {
+    position: fixed;
+    padding: 15px 20px;
+    background-color: rgb(255, 0, 119);
+    border: 2px solid rgb(255, 0, 119);
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px aliceblue;
+}
+
+.crossCont {
+    background-color: rgb(255, 0, 119);
+    padding: 3px;
+    margin: 2px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.crossSign {
+    background-color: rgb(255, 0, 119);
+}
+
+#crossSign {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    background-color: aliceblue;
+    font-size: 0.8em;
+    padding: 1.79px 6px;
+    border-radius: 100px;
+    border: 2px solid aliceblue;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 0, 119);
+}
+
+.addNoteCont {
+    padding: 10px;
+    border: 1.58px solid aliceblue;
+    border-radius: 3.5px;
+}
+
+.headingCont {
+    background-color: rgb(255, 0, 119);
+    padding: 5px;
+    margin: 2px;
+    border-radius: 3px;
+}
+
+.heading {
+    padding: 3px;
+    background-color: rgb(255, 0, 119);
+    border-radius: 3px;
+}
+
+.heading h3 {
+    color: aliceblue;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+}
+
+.inputCont {
+    padding: 5px;
+    margin: 2px;
+    margin-left: 5px;
+}
+
+.inputCont input {
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.7em;
+    border-radius: 3px;
+    border: 1px solid aliceblue;
+    outline: aliceblue;
+    color: aliceblue;
+    background-color: rgb(255, 0, 119);
+}
+
+.inputCont input::placeholder {
+    color: aliceblue;
+    text-transform: capitalize;
+}
+
+.msgCont {
+    margin: 2px;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.msgCont textarea {
+    resize: none;
+    background-color: rgb(255, 0, 119);
+    border-radius: 3px;
+    border: 1px solid aliceblue;
+    outline: aliceblue;
+    padding: 4px;
+    font-size: 0.7em;
+    color: aliceblue;
+    font-family: 'Poppins', sans-serif;
+}
+
+.buttonCont {
+    background-color: rgb(255, 0, 119);
+    text-align: right;
+    padding: 5px;
+    margin: 2px;
+}
+
+.buttonCont button {
+    color: rgb(255, 0, 119);
+    font-size: 0.9em;
+    background-color: aliceblue;
+    border: 1px solid aliceblue;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+.msgCont textarea::placeholder {
+    color: aliceblue;
+    text-transform: capitalize;
+}
+
+/* main notes division */
+.container {
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.innerContainer {
+    padding: 30px 20px;
+    background-color: aliceblue;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(201px, 1fr));
+}
+
+.signCont {
+    background-color: aliceblue;
+    padding: 5px;
+    width: fit-content;
+    position: fixed;
+    bottom: 10px;
+    right: 1px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.toolTipCont .toolTip {
+    background-color: rgb(255, 0, 119);
+    width: fit-content;
+    padding: 4px;
+    color: black;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px azure;
+    font-family: 'Poor Story', cursive;
+    font-size: 1em;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    cursor: pointer;
+    display: none;
+}
+
+.signCont:hover .toolTip {
+    display: block;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.signCont:hover .sign {
+    border-radius: 3px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 2px 6px;
+}
+
+.sign {
+    background-color: rgb(255, 0, 119);
+    width: fit-content;
+    padding: 0 6px;
+    border: 2px solid rgb(255, 0, 119);
+    border-radius: 100px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px azure;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.sign #addIcon {
+    color: black;
+    background-color: rgb(255, 0, 119);
+    font-weight: 600;
+    font-size: 1em;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.noteCont {
+    background-color: yellow;
+    padding: 6px;
+    border-radius: 4px;
+    border: 2px solid yellow;
+    box-shadow: 0px 0px 8px rgba(128, 128, 128, 0.798);
+    width: 200px;
+    margin: 15px;
+    height: auto;
+}
+
+.noteHeading {
+    background-color: yellow;
+    padding: 3px;
+}
+
+.noteHeading span {
+    color: black;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.2em;
+}
+
+.note {
+    padding: 3px;
+    background-color: yellow;
+}
+
+.note span {
+    color: black;
+    font-family: 'Poor Story', cursive;
+}
+
+.options {
+    background-color: yellow;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.optionsLinksCont {
+    background-color: aliceblue;
+    border: 1px solid aliceblue;
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.637);
+    border-radius: 3px;
+    margin-right: 2px;
+    position: absolute;
+    left: 17%;
+}
+
+.mainoptionCont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 3px;
+    padding: 3px;
+    margin: 1px;
+    cursor: pointer;
+}
+
+.mainoptionCont:hover {
+    background-color: rgba(128, 128, 128, 0.131);
+}
+
+.optionsIcon {
+    width: 19px;
+    height: 20px;
+}
+
+.spanOption {
+    padding: 1px;
+    margin-left: 2px;
+}
+
+.spanOption span {
+    color: black;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 0.9em;
+}
+
+.optionsCont {
+    text-align: right;
+    padding: 0 7px;
+    padding-bottom: 6px;
+    width: fit-content;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.optionsCont:hover {
+    background-color: #ffeb3b;
+}
+
+.optionsCont span {
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+}
+

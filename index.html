@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Short Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="index.js"></script>
+</head>
+
+<body id="body">
+    <div class="fixedCont" id="addNoteDiv">
+        <div class="fixedInnerCont">
+            <div class="crossCont">
+                <div class="crossSign">
+                    <span id="crossSign" class="userSelectNone">x</span>
+                </div>
+            </div>
+            <div class="addNoteCont">
+                <div class="headingCont">
+                    <div class="heading">
+                        <h3 class="userSelectNone"> Add Title</h3>
+                    </div>
+                </div>
+                <div class="inputCont">
+                    <input type="text" name="text" class="userSelectNone" id="note_title" placeholder="add note title" autocomplete="off">
+                </div>
+                <div class="headingCont">
+                    <div class="heading">
+                        <h3 class="userSelectNone"> Add Note Description</h3>
+                    </div>
+                </div>
+                <div class="msgCont">
+                    <textarea name="textarea" class="userSelectNone" id="userNote" cols="30" rows="10" placeholder="enter your note Description"></textarea>
+                </div>
+                <div class="buttonCont">
+                    <button class="userSelectNone">Add Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="mainCont">
+        <div class="innerContainer" id="mainInnerCont">
+            <div class="signCont" id="addNewNoteIcon">
+                <div class="sign" id="addIconCont">
+                    <span id="addIcon">+</span>
+                </div>
+                <div class="toolTipCont">
+                    <span class="toolTip">Add note</span>
+                </div>
+            </div>
+            <!-- Show Notes -->
+            <div class="noteCont">
+                <div class="noteHeading">
+                    <span>My Notes App</span>
+                </div>
+                <div class="note">
+                    <span>this is my notes app created using html css and javascript.</span>
+                </div>
+                <div class="options">
+                    <div class="optionsLinksCont" id="optionsLinksCont" style="display: none;">
+                        <div class="mainoptionCont">
+                            <img src="edit.svg" alt="" draggable="false" id="editImg" class="optionsIcon">
+                            <div class="spanOption">
+                                <span class="userSelectNone">Edit</span>
+                            </div>
+                        </div>
+                        <div class="mainoptionCont">
+                            <img src="delete.svg" alt="" draggable="false" id="deleteImg" class="optionsIcon">
+                            <div class="spanOption">
+                                <span class="userSelectNone">Delete</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="optionsCont" id="optionsDots">
+                        <span class="userSelectNone">...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
