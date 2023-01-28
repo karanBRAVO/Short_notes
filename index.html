@@ -37,7 +37,7 @@
                     <textarea name="textarea" class="userSelectNone" id="userNote" cols="30" rows="10" placeholder="enter your note Description"></textarea>
                 </div>
                 <div class="buttonCont">
-                    <button class="userSelectNone">Add Note</button>
+                    <button class="userSelectNone" id="addNoteBtn">Add Note</button>
                 </div>
             </div>
         </div>
@@ -61,7 +61,8 @@
                     <span>this is my notes app created using html css and javascript.</span>
                 </div>
                 <div class="options">
-                    <div class="optionsLinksCont" id="optionsLinksCont" style="display: none;">
+                    <div id="hiddenLayer"></div>
+                    <div class="optionsLinksCont" id="optionsLinksCont">
                         <div class="mainoptionCont">
                             <img src="edit.svg" alt="" draggable="false" id="editImg" class="optionsIcon">
                             <div class="spanOption">

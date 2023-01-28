@@ -178,7 +178,7 @@ body {
     padding: 30px 20px;
     background-color: aliceblue;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(201px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
 .signCont {
@@ -207,6 +207,17 @@ body {
     -moz-user-select: none;
     cursor: pointer;
     display: none;
+    transition: all 0.5s;
+    animation: moveback 0.5s;
+}
+
+@keyframes moveback {
+    from {
+        transform: translateX(50px);
+    }
+    to {
+        transform: translateX(0px);
+    }
 }
 
 .signCont:hover .toolTip {
@@ -219,7 +230,7 @@ body {
     border-radius: 3px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-    padding: 2px 6px;
+    padding: 2.31px 6px;
 }
 
 .sign {
@@ -233,6 +244,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: row;
+    transition: all 0.1s;
 }
 
 .sign #addIcon {
@@ -265,6 +277,7 @@ body {
     color: black;
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.2em;
+    text-transform: capitalize;
 }
 
 .note {
@@ -285,14 +298,25 @@ body {
     justify-content: right;
 }
 
+#hiddenLayer {
+    display: none;
+    background: none;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
 .optionsLinksCont {
     background-color: aliceblue;
     border: 1px solid aliceblue;
     box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.637);
     border-radius: 3px;
     margin-right: 2px;
+    display: none;
     position: absolute;
-    left: 17%;
+    margin-right: 29.5px;
 }
 
 .mainoptionCont {
