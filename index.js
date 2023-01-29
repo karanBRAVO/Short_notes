@@ -53,6 +53,7 @@ function addAllEditButtons_toDict(edit_dict, count) {
                 modify_userNote.value = mainContainer.children[2].children[0].innerHTML;
                 which_edit_btn_clicked = edit_dict[`editBtn_${i}`];
                 hiddenLayer.click();
+                addNewNoteIcon.style.display = 'none';
             })
         }
     }
@@ -114,6 +115,7 @@ modify_crossSign.addEventListener('click', () => {
     modifyNoteDiv.style.display = "none";
     modify_note_title.value = "";
     modify_userNote.value = "";
+    addNewNoteIcon.style.display = 'flex';
 })
 
 function addEventListener_onDots(dot_dict, count, optionCont_dict) {
