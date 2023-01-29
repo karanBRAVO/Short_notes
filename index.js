@@ -4,12 +4,30 @@ const mainInnerCont = document.getElementById("mainInnerCont");
 const addNewNoteIcon = document.getElementById('addNewNoteIcon');
 const addNoteDiv = document.getElementById('addNoteDiv');
 const crossSign = document.getElementById("crossSign");
-const optionsDots = document.getElementById("optionsDots");
-const optionsLinksCont = document.getElementById('optionsLinksCont');
 const hiddenLayer = document.getElementById("hiddenLayer");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const note_title = document.getElementById("note_title");
 const userNote = document.getElementById("userNote");
+
+let optionsLinksContCount = 1;
+let optionsLinksContDict = {};
+
+function createOptionLinksDict(dict, count) {
+    for (let i = 1; i <= count; i++) {
+        dict[`optionsLinksCont_${i}`] = document.getElementById(`optionsLinksCont_${i}`);
+    }
+}
+createOptionLinksDict(optionsLinksContDict, optionsLinksContCount);
+
+let optionsDotsCount = 1;
+let optionsDotsDict = {};
+
+function createOptionDotsDict(dict, count) {
+    for (let i = 1; i <= count; i++) {
+        dict[`optionsDots_${i}`] = document.getElementById(`optionsDots_${i}`);
+    }
+}
+createOptionDotsDict(optionsDotsDict, optionsDotsCount);
 
 addNewNoteIcon.addEventListener('click', () => {
     addNoteDiv.style.display = 'flex';
@@ -19,20 +37,32 @@ addNewNoteIcon.addEventListener('click', () => {
 crossSign.addEventListener('click', () => {
     addNoteDiv.style.display = 'none';
     addNewNoteIcon.style.display = 'flex';
+    note_title.value = "";
+    userNote.value = "";
 });
 
-optionsDots.addEventListener('click', () => {
-    optionsLinksCont.style.display = 'block';
-    hiddenLayer.style.display = 'block';
-})
+function addEventListener_onDots(dot_dict, count, optionCont_dict) {
+    for (let i = 1; i <= count; i++) {
+        dot_dict[`optionsDots_${i}`].addEventListener('click', () => {
+            optionCont_dict[`optionsLinksCont_${i}`].style.display = 'block';
+            hiddenLayer.style.display = 'block';
+        })
+    }
+}
+addEventListener_onDots(optionsDotsDict, optionsDotsCount, optionsLinksContDict);
+
+function hideOptionLinksContainers(dict, count) {
+    for (let i = 1; i <= count; i++) {
+        dict[`optionsLinksCont_${i}`].style.display = 'none';
+    }
+}
 
 hiddenLayer.addEventListener('click', () => {
-    optionsLinksCont.style.display = 'none';
     hiddenLayer.style.display = 'none';
+    hideOptionLinksContainers(optionsLinksContDict, optionsLinksContCount);
 })
 
 addNoteBtn.addEventListener('click', () => {
-    crossSign.click();  // to close the add note window
     let title = String(note_title.value);
     let note = String(userNote.value);
     if (note.length > 0) {
@@ -40,9 +70,8 @@ addNoteBtn.addEventListener('click', () => {
             title = "new note";
         }
         addNote(title, note);
-        note_title.value = "";
-        userNote.value = "";
     }
+    crossSign.click();  // to close the add note window
 })
 
 function addNote(title, note) {
@@ -50,6 +79,9 @@ function addNote(title, note) {
     let noteCont = document.createElement('div');
     noteCont.className = "noteCont";
     mainInnerCont.appendChild(noteCont);
+
+    // function to add options to edit and delete
+    showOptions(noteCont);
 
     // creating inner part of main note container
     let noteHeading = document.createElement('div');
@@ -68,9 +100,6 @@ function addNote(title, note) {
     let spanNote = document.createElement('span');
     spanNote.innerHTML = `${note}`;
     noteDescCont.appendChild(spanNote);
-
-    // function to add options to edit and delete
-    showOptions(noteCont);
 }
 
 function showOptions(eName) {
@@ -79,16 +108,40 @@ function showOptions(eName) {
     optionsContainer.className = "options";
     eName.appendChild(optionsContainer);
 
+    // incrementing option container variable
+    optionsLinksContCount++;
+
+    // creating date container
+    let dateContainer = document.createElement('div');
+    dateContainer.className = `dateCreatedCont`;
+    optionsContainer.appendChild(dateContainer);
+
+    // creating inner container for date box
+    let dateInnerCont = document.createElement('div');
+    dateInnerCont.className = `spanContDate`;
+    dateContainer.appendChild(dateInnerCont);
+
+    // creating span to store date
+    let spanDate = document.createElement('span');
+    spanDate.id = `dateCreatedSpan_${optionsLinksContCount}`;
+    let date = new Date();
+    spanDate.innerHTML = `${date.toLocaleString()}`;
+    dateInnerCont.appendChild(spanDate);
+
     // creating options
     let optionsLinksContainer = document.createElement('div');
     optionsLinksContainer.className = "optionsLinksCont";
-    optionsLinksContainer.id = "optionsLinksCont";
+    optionsLinksContainer.id = `optionsLinksCont_${optionsLinksContCount}`;
+    optionsContainer.appendChild(optionsLinksContainer);
+    createOptionLinksDict(optionsLinksContDict, optionsLinksContCount);
 
     // creating innerpart of option links container
     let mainOptionCont_1 = document.createElement('div');
-    let mainOptionCont_2 = document.createElement('div');
     mainOptionCont_1.className = "mainoptionCont";
+    optionsLinksContainer.appendChild(mainOptionCont_1);
+    let mainOptionCont_2 = document.createElement('div');
     mainOptionCont_2.className = "mainoptionCont";
+    optionsLinksContainer.appendChild(mainOptionCont_2);
 
     // creating images elements and adding to containers
     let editImg = document.createElement('img');
@@ -114,15 +167,20 @@ function showOptions(eName) {
     let spanText_1 = document.createElement('span');
     spanText_1.className = "userSelectNone";
     spanText_1.innerHTML = "Edit";
+    textCont_1.appendChild(spanText_1);
     let spanText_2 = document.createElement('span');
     spanText_2.className = "userSelectNone";
     spanText_2.innerHTML = "Delete";
+    textCont_2.appendChild(spanText_2);
 
     // creating dots container
+    optionsDotsCount++;
     let optionDotContainer = document.createElement('div');
     optionDotContainer.className = "optionsCont";
-    optionDotContainer.id = "optionsDots";
+    optionDotContainer.id = `optionsDots_${optionsDotsCount}`;
     optionsContainer.appendChild(optionDotContainer);
+    createOptionDotsDict(optionsDotsDict, optionsDotsCount);
+    addEventListener_onDots(optionsDotsDict, optionsDotsCount, optionsLinksContDict);
 
     // adding dots
     let spanDots = document.createElement('span');

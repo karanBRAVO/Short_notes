@@ -11,6 +11,8 @@
 /* font-family: 'Poor Story', cursive; */
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 /* font-family: 'Varela Round', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
+/* font-family: 'Teko', sans-serif; */
 
 /* styling */
 * {
@@ -182,7 +184,6 @@ body {
 }
 
 .signCont {
-    background-color: aliceblue;
     padding: 5px;
     width: fit-content;
     position: fixed;
@@ -215,6 +216,7 @@ body {
     from {
         transform: translateX(50px);
     }
+
     to {
         transform: translateX(0px);
     }
@@ -295,7 +297,23 @@ body {
     width: 200px;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: space-between;
+}
+
+.options .dateCreatedCont {
+    background-color: yellow;
+    padding: 3px;
+}
+
+.options .dateCreatedCont .spanContDate {
+    padding: 0 1px;
+}
+
+.options .dateCreatedCont .spanContDate span {
+    color: black;
+    text-transform: capitalize;
+    font-size: 1em;
+    font-family: 'Teko', sans-serif;
 }
 
 #hiddenLayer {
@@ -316,7 +334,8 @@ body {
     margin-right: 2px;
     display: none;
     position: absolute;
-    margin-right: 29.5px;
+    margin-left: 93.5px;
+    margin-bottom: 28px;
 }
 
 .mainoptionCont {
@@ -367,4 +386,3 @@ body {
     font-weight: 600;
     cursor: pointer;
 }
-
