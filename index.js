@@ -160,10 +160,10 @@ addNoteBtn.addEventListener('click', () => {
             title = "new note";
         }
         addNote(title, note);
+        // blitting message
+        msg("note added succesfully", "#03C988", "flex");
     }
     crossSign.click();  // to close the add note window
-    // blitting message
-    msg("note added succesfully", "#03C988", "flex");
 })
 
 function addNote(title, note) {
