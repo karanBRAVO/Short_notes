@@ -8,26 +8,85 @@ const hiddenLayer = document.getElementById("hiddenLayer");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const note_title = document.getElementById("note_title");
 const userNote = document.getElementById("userNote");
+const modify_crossSign = document.getElementById("modify_crossSign");
+const modifyNoteDiv = document.getElementById("modifyNoteDiv");
+const modify_note_title = document.getElementById("modify_note_title");
+const modify_userNote = document.getElementById("modify_userNote");
+const modifyNoteBtn = document.getElementById("modifyNoteBtn");
 
 let optionsLinksContCount = 1;
 let optionsLinksContDict = {};
 
 function createOptionLinksDict(dict, count) {
     for (let i = 1; i <= count; i++) {
-        dict[`optionsLinksCont_${i}`] = document.getElementById(`optionsLinksCont_${i}`);
+        if (document.getElementById(`optionsLinksCont_${i}`) != null) {
+            dict[`optionsLinksCont_${i}`] = document.getElementById(`optionsLinksCont_${i}`);
+        }
     }
 }
 createOptionLinksDict(optionsLinksContDict, optionsLinksContCount);
 
-let optionsDotsCount = 1;
 let optionsDotsDict = {};
 
 function createOptionDotsDict(dict, count) {
     for (let i = 1; i <= count; i++) {
-        dict[`optionsDots_${i}`] = document.getElementById(`optionsDots_${i}`);
+        if (document.getElementById(`optionsDots_${i}`) != null) {
+            dict[`optionsDots_${i}`] = document.getElementById(`optionsDots_${i}`);
+        }
     }
 }
-createOptionDotsDict(optionsDotsDict, optionsDotsCount);
+createOptionDotsDict(optionsDotsDict, optionsLinksContCount);
+
+let editBtnDict = {};
+let which_edit_btn_clicked = null;
+
+function addAllEditButtons_toDict(edit_dict, count) {
+    for (let i = 2; i <= count; i++) {
+        if (document.getElementById(`editBtn_${i}`) != null) {
+            edit_dict[`editBtn_${i}`] = document.getElementById(`editBtn_${i}`);
+            edit_dict[`editBtn_${i}`].addEventListener('click', () => {
+                let mainContainer = ((edit_dict[`editBtn_${i}`].parentNode).parentNode).parentNode;
+                modifyNoteDiv.style.display = "flex";
+                modify_note_title.value = mainContainer.children[1].children[0].innerHTML;
+                modify_userNote.value = mainContainer.children[2].children[0].innerHTML;
+                which_edit_btn_clicked = edit_dict[`editBtn_${i}`];
+                hiddenLayer.click();
+            })
+        }
+    }
+}
+addAllEditButtons_toDict(editBtnDict, optionsLinksContCount);
+
+function modifyValues() {
+    if (which_edit_btn_clicked != null) {    
+        let mainContainer = ((which_edit_btn_clicked.parentNode).parentNode).parentNode;
+        mainContainer.children[1].children[0].innerHTML = modify_note_title.value;
+        mainContainer.children[2].children[0].innerHTML = modify_userNote.value;
+        modify_crossSign.click();
+    }
+}
+
+modifyNoteBtn.addEventListener('click', modifyValues);
+
+let deleteBtnDict = {};
+
+function addAllDeleteButtons_toDict(del_dict, count) {
+    for (let i = 2; i <= count; i++) {
+        if (document.getElementById(`deleteBtn_${i}`) != null) {
+            del_dict[`deleteBtn_${i}`] = document.getElementById(`deleteBtn_${i}`);
+            del_dict[`deleteBtn_${i}`].addEventListener('click', () => {
+                let mainContainer = ((del_dict[`deleteBtn_${i}`].parentNode).parentNode).parentNode;
+                mainContainer.remove();
+                hiddenLayer.click();
+                deleteBtnDict = {};
+                editBtnDict = {};
+                optionsDotsDict = {};
+                // optionsLinksContDict = {};
+            })
+        }
+    }
+}
+addAllDeleteButtons_toDict(deleteBtnDict, optionsLinksContCount);
 
 addNewNoteIcon.addEventListener('click', () => {
     addNoteDiv.style.display = 'flex';
@@ -41,19 +100,29 @@ crossSign.addEventListener('click', () => {
     userNote.value = "";
 });
 
+modify_crossSign.addEventListener('click', () => {
+    modifyNoteDiv.style.display = "none";
+    modify_note_title.value = "";
+    modify_userNote.value = "";
+})
+
 function addEventListener_onDots(dot_dict, count, optionCont_dict) {
     for (let i = 1; i <= count; i++) {
-        dot_dict[`optionsDots_${i}`].addEventListener('click', () => {
-            optionCont_dict[`optionsLinksCont_${i}`].style.display = 'block';
-            hiddenLayer.style.display = 'block';
-        })
+        if (dot_dict[`optionsDots_${i}`] != null) {
+            dot_dict[`optionsDots_${i}`].addEventListener('click', () => {
+                optionCont_dict[`optionsLinksCont_${i}`].style.display = 'block';
+                hiddenLayer.style.display = 'block';
+            })
+        }
     }
 }
-addEventListener_onDots(optionsDotsDict, optionsDotsCount, optionsLinksContDict);
+addEventListener_onDots(optionsDotsDict, optionsLinksContCount, optionsLinksContDict);
 
 function hideOptionLinksContainers(dict, count) {
     for (let i = 1; i <= count; i++) {
-        dict[`optionsLinksCont_${i}`].style.display = 'none';
+        if (dict[`optionsLinksCont_${i}`] != null) {
+            dict[`optionsLinksCont_${i}`].style.display = 'none';
+        }
     }
 }
 
@@ -138,10 +207,14 @@ function showOptions(eName) {
     // creating innerpart of option links container
     let mainOptionCont_1 = document.createElement('div');
     mainOptionCont_1.className = "mainoptionCont";
+    mainOptionCont_1.id = `editBtn_${optionsLinksContCount}`
     optionsLinksContainer.appendChild(mainOptionCont_1);
+    addAllEditButtons_toDict(editBtnDict, optionsLinksContCount);
     let mainOptionCont_2 = document.createElement('div');
     mainOptionCont_2.className = "mainoptionCont";
+    mainOptionCont_2.id = `deleteBtn_${optionsLinksContCount}`;
     optionsLinksContainer.appendChild(mainOptionCont_2);
+    addAllDeleteButtons_toDict(deleteBtnDict, optionsLinksContCount);
 
     // creating images elements and adding to containers
     let editImg = document.createElement('img');
@@ -174,13 +247,12 @@ function showOptions(eName) {
     textCont_2.appendChild(spanText_2);
 
     // creating dots container
-    optionsDotsCount++;
     let optionDotContainer = document.createElement('div');
     optionDotContainer.className = "optionsCont";
-    optionDotContainer.id = `optionsDots_${optionsDotsCount}`;
+    optionDotContainer.id = `optionsDots_${optionsLinksContCount}`;
     optionsContainer.appendChild(optionDotContainer);
-    createOptionDotsDict(optionsDotsDict, optionsDotsCount);
-    addEventListener_onDots(optionsDotsDict, optionsDotsCount, optionsLinksContDict);
+    createOptionDotsDict(optionsDotsDict, optionsLinksContCount);
+    addEventListener_onDots(optionsDotsDict, optionsLinksContCount, optionsLinksContDict);
 
     // adding dots
     let spanDots = document.createElement('span');

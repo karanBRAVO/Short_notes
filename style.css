@@ -33,6 +33,9 @@ body {
     -webkit-user-select: none;
 }
 
+/* modify box */
+
+
 /* add new note division */
 .fixedCont {
     width: 100%;
@@ -66,7 +69,7 @@ body {
     background-color: rgb(255, 0, 119);
 }
 
-#crossSign {
+.crossSign span {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     background-color: aliceblue;

@@ -12,6 +12,39 @@
 </head>
 
 <body id="body">
+    <div id="hiddenLayer"></div>
+    <div class="fixedCont" id="modifyNoteDiv">
+        <div class="fixedInnerCont" style="background-color: #F94A29; border-color: #F94A29;">
+            <div class="crossCont" style="background-color: #F94A29;">
+                <div class="crossSign" style="background-color: #F94A29;">
+                    <span id="modify_crossSign" class="userSelectNone" style="color: #F94A29;">x</span>
+                </div>
+            </div>
+            <div class="addNoteCont">
+                <div class="headingCont" style="background-color: #F94A29;">
+                    <div class="heading" style="background-color: #F94A29;">
+                        <h3 class="userSelectNone">Modify title</h3>
+                    </div>
+                </div>
+                <div class="inputCont">
+                    <input type="text" class="userSelectNone" id="modify_note_title" placeholder="add new note title"
+                        autocomplete="off" style="background-color: #F94A29;">
+                </div>
+                <div class="headingCont" style="background-color: #F94A29;">
+                    <div class="heading" style="background-color:#F94A29;">
+                        <h3 class="userSelectNone"> Modify Note Description</h3>
+                    </div>
+                </div>
+                <div class="msgCont">
+                    <textarea name="textarea" class="userSelectNone" id="modify_userNote" cols="30" rows="10"
+                        placeholder="enter your note Description" style="background-color: #F94A29;"></textarea>
+                </div>
+                <div class="buttonCont" style="background-color: #F94A29;">
+                    <button class="userSelectNone" id="modifyNoteBtn" style="color:#F94A29;">Modify Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="fixedCont" id="addNoteDiv">
         <div class="fixedInnerCont">
             <div class="crossCont">
@@ -62,15 +95,14 @@
                             <span id="dateCreatedSpan_1">1/29/2023, 1:25:48 PM</span>
                         </div>
                     </div>
-                    <div id="hiddenLayer"></div>
                     <div class="optionsLinksCont" id="optionsLinksCont_1">
-                        <div class="mainoptionCont">
+                        <div class="mainoptionCont" id="editBtn_1" style="cursor: not-allowed;">
                             <img src="edit.svg" alt="" draggable="false" id="editImg" class="optionsIcon">
                             <div class="spanOption">
                                 <span class="userSelectNone">Edit</span>
                             </div>
                         </div>
-                        <div class="mainoptionCont">
+                        <div class="mainoptionCont" id="deleteBtn_1"  style="cursor: not-allowed;">
                             <img src="delete.svg" alt="" draggable="false" id="deleteImg" class="optionsIcon">
                             <div class="spanOption">
                                 <span class="userSelectNone">Delete</span>
