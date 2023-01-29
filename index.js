@@ -13,6 +13,8 @@ const modifyNoteDiv = document.getElementById("modifyNoteDiv");
 const modify_note_title = document.getElementById("modify_note_title");
 const modify_userNote = document.getElementById("modify_userNote");
 const modifyNoteBtn = document.getElementById("modifyNoteBtn");
+const showInfo_top = document.getElementById("showInfo_top");
+const info = document.getElementById("info");
 
 let optionsLinksContCount = 1;
 let optionsLinksContDict = {};
@@ -58,10 +60,16 @@ function addAllEditButtons_toDict(edit_dict, count) {
 addAllEditButtons_toDict(editBtnDict, optionsLinksContCount);
 
 function modifyValues() {
-    if (which_edit_btn_clicked != null) {    
-        let mainContainer = ((which_edit_btn_clicked.parentNode).parentNode).parentNode;
-        mainContainer.children[1].children[0].innerHTML = modify_note_title.value;
-        mainContainer.children[2].children[0].innerHTML = modify_userNote.value;
+    if (which_edit_btn_clicked != null) {
+        if ((modify_userNote.value).length > 0) {
+            if ((modify_note_title.value).length == 0) {
+                modify_note_title.value = "new note";
+            }
+            let mainContainer = ((which_edit_btn_clicked.parentNode).parentNode).parentNode;
+            mainContainer.children[1].children[0].innerHTML = modify_note_title.value;
+            mainContainer.children[2].children[0].innerHTML = modify_userNote.value;
+            msg("note modified succesfully", "#03C988", "flex");
+        }
         modify_crossSign.click();
     }
 }
@@ -81,6 +89,7 @@ function addAllDeleteButtons_toDict(del_dict, count) {
                 deleteBtnDict = {};
                 editBtnDict = {};
                 optionsDotsDict = {};
+                msg("note deleted succesfully", "#F55050", "flex");
                 // optionsLinksContDict = {};
             })
         }
@@ -91,6 +100,7 @@ addAllDeleteButtons_toDict(deleteBtnDict, optionsLinksContCount);
 addNewNoteIcon.addEventListener('click', () => {
     addNoteDiv.style.display = 'flex';
     addNewNoteIcon.style.display = 'none';
+    hiddenLayer.click();
 });
 
 crossSign.addEventListener('click', () => {
@@ -131,6 +141,17 @@ hiddenLayer.addEventListener('click', () => {
     hideOptionLinksContainers(optionsLinksContDict, optionsLinksContCount);
 })
 
+function hideMsg() {
+    showInfo_top.style.display = "none";
+}
+
+function msg(text, color, set_display) {
+    info.innerHTML = text;
+    info.parentNode.style.background = color;
+    showInfo_top.style.display = set_display;
+    setTimeout(hideMsg, 2 * 1000);
+}
+
 addNoteBtn.addEventListener('click', () => {
     let title = String(note_title.value);
     let note = String(userNote.value);
@@ -141,6 +162,8 @@ addNoteBtn.addEventListener('click', () => {
         addNote(title, note);
     }
     crossSign.click();  // to close the add note window
+    // blitting message
+    msg("note added succesfully", "#03C988", "flex");
 })
 
 function addNote(title, note) {
@@ -149,7 +172,7 @@ function addNote(title, note) {
     noteCont.className = "noteCont";
     mainInnerCont.appendChild(noteCont);
 
-    // function to add options to edit and delete
+    // function to add options to edit and delete and date created
     showOptions(noteCont);
 
     // creating inner part of main note container
