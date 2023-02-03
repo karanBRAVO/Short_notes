@@ -79,6 +79,14 @@ body {
     justify-content: center;
 }
 
+.fixedCont .form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
 .fixedInnerCont {
     position: fixed;
     padding: 15px 20px;

@@ -5,6 +5,7 @@ const addNewNoteIcon = document.getElementById('addNewNoteIcon');
 const addNoteDiv = document.getElementById('addNoteDiv');
 const crossSign = document.getElementById("crossSign");
 const hiddenLayer = document.getElementById("hiddenLayer");
+const addDataForm = document.getElementById("addDataForm");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const note_title = document.getElementById("note_title");
 const userNote = document.getElementById("userNote");
@@ -165,8 +166,21 @@ addNoteBtn.addEventListener('click', () => {
         // blitting message
         msg("note added succesfully", "#03C988", "flex");
     }
+    else {
+        not_addDataToDb();
+    }
     crossSign.click();  // to close the add note window
 })
+
+function addDataToDb(heading, description, dateTime) {
+    addDataForm.action = `/addData/${dateTime}/${heading}/${description}`;
+    addDataForm.method = `post`;
+}
+
+function not_addDataToDb() {
+    addDataForm.action = `/`;
+    addDataForm.method = `get`;
+}
 
 function addNote(title, note) {
     // creating main note container
@@ -175,7 +189,7 @@ function addNote(title, note) {
     mainInnerCont.appendChild(noteCont);
 
     // function to add options to edit and delete and date created
-    showOptions(noteCont);
+    showOptions(title, note, noteCont);
 
     // creating inner part of main note container
     let noteHeading = document.createElement('div');
@@ -196,7 +210,7 @@ function addNote(title, note) {
     noteDescCont.appendChild(spanNote);
 }
 
-function showOptions(eName) {
+function showOptions(title, note, eName) {
     // creating option container
     let optionsContainer = document.createElement('div');
     optionsContainer.className = "options";
@@ -219,8 +233,12 @@ function showOptions(eName) {
     let spanDate = document.createElement('span');
     spanDate.id = `dateCreatedSpan_${optionsLinksContCount}`;
     let date = new Date();
-    spanDate.innerHTML = `${date.toLocaleString()}`;
+    let dateTime = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()} ${date.toLocaleTimeString()}`;
+    spanDate.innerHTML = `${dateTime}`;
     dateInnerCont.appendChild(spanDate);
+
+    // adding data to database
+    addDataToDb(title, note, dateTime);
 
     // creating options
     let optionsLinksContainer = document.createElement('div');
@@ -243,12 +261,12 @@ function showOptions(eName) {
 
     // creating images elements and adding to containers
     let editImg = document.createElement('img');
-    editImg.src = "edit.svg";
+    editImg.src = "./assets/edit.svg";
     editImg.id = "editImg";
     editImg.className = "optionsIcon";
     mainOptionCont_1.appendChild(editImg);
     let delImg = document.createElement('img');
-    delImg.src = "delete.svg";
+    delImg.src = "./assets/delete.svg";
     delImg.id = "deleteImg";
     delImg.className = "optionsIcon";
     mainOptionCont_2.appendChild(delImg);

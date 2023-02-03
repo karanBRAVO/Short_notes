@@ -1,0 +1,25 @@
+{
+  "name": "shortnotes",
+  "version": "1.0.0",
+  "description": "This is my notes app.",
+  "main": "script.js",
+  "scripts": {
+    "test": "start",
+    "start": "nodemon ./src/app/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karanBRAVO/Short_notes.git"
+  },
+  "author": "Karan Yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karanBRAVO/Short_notes/issues"
+  },
+  "homepage": "https://github.com/karanBRAVO/Short_notes#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "mongoose": "^6.9.0"
+  }
+}
