@@ -14,6 +14,9 @@ const APP = EXPRESS()
 // getting port else set to default 
 const PORT = process.env.PORT || 8899
 
+// setting the host name
+const HOSTNAME = 'localhost'
+
 // using css and client side js
 const PUBLIC_PATH = PATH.join(__dirname, "../../public/")
 APP.use(EXPRESS.static(PUBLIC_PATH))
@@ -39,7 +42,7 @@ APP.get("/", (req, res) => {
     DB_MODEL.find().then((data) => {
         console.log(`[SUCCESS] data fetched successfully`)
         inc_count(data[data.length - 1].count)
-        res.render("index", { data: data })
+        res.render("index", { data: data, count: data[data.length - 1].count })
     }).catch((err) => {
         console.log(`[!ERROR] unable to fetch the data`)
         console.log(err)
@@ -101,9 +104,9 @@ APP.post("/deleteData/:slug1", (req, res) => {
 })
 
 // starting app
-APP.listen(PORT, (err) => {
+APP.listen(PORT, HOSTNAME, (err) => {
     if (!(err)) {
         console.log(`Server started...`)
-        console.log(`Go to ~ http://localhost:${PORT}`)
+        console.log(`Go to ~ http://${HOSTNAME}:${PORT}`)
     }
 })

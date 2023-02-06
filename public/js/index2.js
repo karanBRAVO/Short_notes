@@ -211,8 +211,8 @@ hiddenBtn.addEventListener('click', () => {
 })
 
 // debugging code
-console.log(count);
-console.log(deleteBtnDict);
-console.log(editBtnDict);
-console.log(optionsLinksContDict);
-console.log(optionsDotsDict);
+// console.log(count);
+// console.log(deleteBtnDict);
+// console.log(editBtnDict);
+// console.log(optionsLinksContDict);
+// console.log(optionsDotsDict);

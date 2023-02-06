@@ -98,13 +98,12 @@
                 </div>
             </div>
             <!-- Show Notes -->
-            <form action="" method="" id="deleteDataForm">
+            <form action="" method="" id="deleteDataForm" style="display: none;">
                 <button type="submit" style="display: hidden;" id="hiddenBtn"></button>
             </form>
             </form>
             <div class="countContainer" style="display: none;">
-                {{!-- TODO: get the last count --}}
-                <p id="getCount">{{data.length}}</p> 
+                <p id="getCount">{{count}}</p>
             </div>
             {{#each data}}
             <div class="noteCont">
@@ -121,14 +120,12 @@
                                 <span class="userSelectNone">Edit</span>
                             </div>
                         </div>
-                        
-                            <div class="mainoptionCont" id="{{this.deleteBtn_id}}">
-                                <img src="./assets/delete.svg" alt="" draggable="false" class="optionsIcon">
-                                <div class="spanOption">
-                                    <span class="userSelectNone">Delete</span>
-                                </div>
+                        <div class="mainoptionCont" id="{{this.deleteBtn_id}}">
+                            <img src="./assets/delete.svg" alt="" draggable="false" class="optionsIcon">
+                            <div class="spanOption">
+                                <span class="userSelectNone">Delete</span>
                             </div>
-                            
+                        </div>
                     </div>
                     <div class="optionsCont" id="{{this.optionsDots_id}}">
                         <span class="userSelectNone">...</span>
