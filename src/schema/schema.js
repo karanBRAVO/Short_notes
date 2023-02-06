@@ -12,6 +12,26 @@ const notesAppSchema = new MONGOOSE.Schema({
     dateTime: {
         type: String,
         required: true
+    },
+    count: {
+        type: Number,
+        required: true
+    },
+    optionsLinksCont_id: {
+        type: String,
+        required: true
+    },
+    optionsDots_id: {
+        type: String,
+        required: true
+    },
+    editBtn_id: {
+        type: String,
+        required: true
+    },
+    deleteBtn_id: {
+        type: String,
+        required: true
     }
 })
 

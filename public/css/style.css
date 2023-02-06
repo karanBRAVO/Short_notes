@@ -51,6 +51,7 @@ body {
     from {
         transform: translateY(-50px);
     }
+
     to {
         transform: translateX(0px);
     }
@@ -389,6 +390,11 @@ body {
     padding: 3px;
     margin: 1px;
     cursor: pointer;
+}
+
+#deleteBtn_1,
+#editBtn_1 {
+    cursor: not-allowed;
 }
 
 .mainoptionCont:hover {

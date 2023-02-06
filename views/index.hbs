@@ -8,10 +8,11 @@
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
     <title>Short Notes</title>
     <link rel="stylesheet" href="./css/style.css">
-    <script defer src="./js/index.js"></script>
+    <script defer src="./js/index2.js"></script>
 </head>
 
 <body id="body">
+    {{!-- TODO: message flashing --}}
     <div class="messageBox userSelectNone" id="showInfo_top">
         <div class="innerMsgCont">
             <span id="info"></span>
@@ -19,36 +20,38 @@
     </div>
     <div id="hiddenLayer"></div>
     <div class="fixedCont" id="modifyNoteDiv">
-        <div class="fixedInnerCont" style="background-color: #F94A29; border-color: #F94A29;">
-            <div class="crossCont" style="background-color: #F94A29;">
-                <div class="crossSign" style="background-color: #F94A29;">
-                    <span id="modify_crossSign" class="userSelectNone" style="color: #F94A29;">x</span>
-                </div>
-            </div>
-            <div class="addNoteCont">
-                <div class="headingCont" style="background-color: #F94A29;">
-                    <div class="heading" style="background-color: #F94A29;">
-                        <h3 class="userSelectNone">Modify title</h3>
+        <form action="" method="" class="form" id="modifyDataForm">
+            <div class="fixedInnerCont" style="background-color: #F94A29; border-color: #F94A29;">
+                <div class="crossCont" style="background-color: #F94A29;">
+                    <div class="crossSign" style="background-color: #F94A29;">
+                        <span id="modify_crossSign" class="userSelectNone" style="color: #F94A29;">x</span>
                     </div>
                 </div>
-                <div class="inputCont">
-                    <input type="text" class="userSelectNone" id="modify_note_title" placeholder="add new note title"
-                        autocomplete="off" style="background-color: #F94A29;">
-                </div>
-                <div class="headingCont" style="background-color: #F94A29;">
-                    <div class="heading" style="background-color:#F94A29;">
-                        <h3 class="userSelectNone"> Modify Note Description</h3>
+                <div class="addNoteCont">
+                    <div class="headingCont" style="background-color: #F94A29;">
+                        <div class="heading" style="background-color: #F94A29;">
+                            <h3 class="userSelectNone">Modify title</h3>
+                        </div>
+                    </div>
+                    <div class="inputCont">
+                        <input type="text" class="userSelectNone" id="modify_note_title"
+                            placeholder="add new note title" autocomplete="off" style="background-color: #F94A29;">
+                    </div>
+                    <div class="headingCont" style="background-color: #F94A29;">
+                        <div class="heading" style="background-color:#F94A29;">
+                            <h3 class="userSelectNone"> Modify Note Description</h3>
+                        </div>
+                    </div>
+                    <div class="msgCont">
+                        <textarea name="textarea" class="userSelectNone" id="modify_userNote" cols="30" rows="10"
+                            placeholder="enter your note Description" style="background-color: #F94A29;"></textarea>
+                    </div>
+                    <div class="buttonCont" style="background-color: #F94A29;">
+                        <button class="userSelectNone" id="modifyNoteBtn" style="color:#F94A29;">Modify Note</button>
                     </div>
                 </div>
-                <div class="msgCont">
-                    <textarea name="textarea" class="userSelectNone" id="modify_userNote" cols="30" rows="10"
-                        placeholder="enter your note Description" style="background-color: #F94A29;"></textarea>
-                </div>
-                <div class="buttonCont" style="background-color: #F94A29;">
-                    <button class="userSelectNone" id="modifyNoteBtn" style="color:#F94A29;">Modify Note</button>
-                </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="fixedCont" id="addNoteDiv">
         <form action="" method="" class="form" id="addDataForm">
@@ -95,38 +98,50 @@
                 </div>
             </div>
             <!-- Show Notes -->
+            <form action="" method="" id="deleteDataForm">
+                <button type="submit" style="display: hidden;" id="hiddenBtn"></button>
+            </form>
+            </form>
+            <div class="countContainer" style="display: none;">
+                {{!-- TODO: get the last count --}}
+                <p id="getCount">{{data.length}}</p> 
+            </div>
+            {{#each data}}
             <div class="noteCont">
                 <div class="options">
                     <div class="dateCreatedCont">
                         <div class="spanContDate">
-                            <span id="dateCreatedSpan_1">{{data.dateTime}}</span>
+                            <span>{{this.dateTime}}</span>
                         </div>
                     </div>
-                    <div class="optionsLinksCont" id="optionsLinksCont_1">
-                        <div class="mainoptionCont" id="editBtn_1" style="cursor: not-allowed;">
-                            <img src="./assets/edit.svg" alt="" draggable="false" id="editImg" class="optionsIcon">
+                    <div class="optionsLinksCont" id="{{this.optionsLinksCont_id}}">
+                        <div class="mainoptionCont" id="{{this.editBtn_id}}">
+                            <img src="./assets/edit.svg" alt="" draggable="false" class="optionsIcon">
                             <div class="spanOption">
                                 <span class="userSelectNone">Edit</span>
                             </div>
                         </div>
-                        <div class="mainoptionCont" id="deleteBtn_1" style="cursor: not-allowed;">
-                            <img src="./assets/delete.svg" alt="" draggable="false" id="deleteImg" class="optionsIcon">
-                            <div class="spanOption">
-                                <span class="userSelectNone">Delete</span>
+                        
+                            <div class="mainoptionCont" id="{{this.deleteBtn_id}}">
+                                <img src="./assets/delete.svg" alt="" draggable="false" class="optionsIcon">
+                                <div class="spanOption">
+                                    <span class="userSelectNone">Delete</span>
+                                </div>
                             </div>
-                        </div>
+                            
                     </div>
-                    <div class="optionsCont" id="optionsDots_1">
+                    <div class="optionsCont" id="{{this.optionsDots_id}}">
                         <span class="userSelectNone">...</span>
                     </div>
                 </div>
                 <div class="noteHeading">
-                    <span>{{data.heading}}</span>
+                    <span>{{this.heading}}</span>
                 </div>
                 <div class="note">
-                    <span>{{data.description}}</span>
+                    <span>{{this.description}}</span>
                 </div>
             </div>
+            {{/each}}
         </div>
     </div>
 </body>
