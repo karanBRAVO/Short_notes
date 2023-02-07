@@ -1,21 +1,26 @@
 // importing express and path
 const EXPRESS = require("express")
 const PATH = require("path")
+const CRYPTO = require("crypto")
 
 // creating database if not there
 require("../connection/conn")
 
 // creating collections
 const DB_MODEL = require("../model/model")
+const AUTH_MODEL = require("../model/model2")
 
-// creating app
+// // creating app
 const APP = EXPRESS()
 
 // getting port else set to default 
 const PORT = process.env.PORT || 8899
 
 // setting the host name
-const HOSTNAME = 'localhost'
+const HOSTNAME = '192.168.43.157'
+
+// setting the slug
+const SLUG = 'auth'
 
 // using css and client side js
 const PUBLIC_PATH = PATH.join(__dirname, "../../public/")
@@ -38,7 +43,10 @@ function inc_count(len) {
 }
 
 // creating routes
-APP.get("/", (req, res) => {
+APP.get("/auth", (req, res) => {
+    res.render("auth")
+})
+APP.get("/shortNotes", (req, res) => {
     DB_MODEL.find().then((data) => {
         console.log(`[SUCCESS] data fetched successfully`)
         inc_count(data[data.length - 1].count)
@@ -48,7 +56,20 @@ APP.get("/", (req, res) => {
         console.log(err)
     })
 })
-APP.get("/addFirstData", async (req, res) => {
+APP.post("/shortNotesAuth/:slug1/:slug2/:slug3", (req, res) => {
+    AUTH_MODEL.findOne({ _id: "63e111a39da432618e4ae011" }).then((data) => {
+        let hashPassword = CRYPTO.createHash("sha256").update(req.params.slug2).digest("hex")
+        if ((req.params.slug1 === data.username) && (hashPassword === data.userid) && (req.params.slug3 === data.email)) {
+            res.redirect("/shortNotes")
+        }
+        else {
+            res.redirect("/auth")
+        }
+    }).catch((err) => {
+        console.log(err)
+    })
+})
+APP.get("/addFirstData", async (req, res) => {  // only for testing
     const addDataToDB = new DB_MODEL({
         heading: "My Notes App",
         description: "this is my notes app created using html css and javascript.",
@@ -61,6 +82,15 @@ APP.get("/addFirstData", async (req, res) => {
     })
     await addDataToDB.save()
     res.send("Data added successfully")
+})
+APP.get("/addAUTHdetails", async (req, res) => {  // only for testing
+    const addDATAtoDB = new AUTH_MODEL({
+        username: "karan yadav",
+        userid: "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+        email: "ky@gmail.com"
+    })
+    await addDATAtoDB.save()
+    res.send("Data added to DB.")
 })
 APP.post("/addData/:slug1/:slug2/:slug3", async (req, res) => {
     const addDataToDB = new DB_MODEL({
@@ -75,7 +105,7 @@ APP.post("/addData/:slug1/:slug2/:slug3", async (req, res) => {
     })
     await addDataToDB.save()
     console.log("Data added successfully")
-    res.redirect("/")
+    res.redirect("/shortNotes")
 })
 APP.post("/updateData/:slug1/:slug2/:slug3", (req, res) => {
     DB_MODEL.updateOne({ editBtn_id: req.params.slug3 }, {
@@ -90,7 +120,7 @@ APP.post("/updateData/:slug1/:slug2/:slug3", (req, res) => {
         console.log(`[!ERROR] error occured while updating`)
         console.log(err)
     })
-    res.redirect("/")
+    res.redirect("/shortNotes")
 })
 APP.post("/deleteData/:slug1", (req, res) => {
     DB_MODEL.deleteOne({ deleteBtn_id: req.params.slug1 }).then((data) => {
@@ -100,13 +130,13 @@ APP.post("/deleteData/:slug1", (req, res) => {
         console.log(`[!ERROR] error while deleting`)
         console.log(err)
     })
-    res.redirect("/")
+    res.redirect("/shortNotes")
 })
 
 // starting app
 APP.listen(PORT, HOSTNAME, (err) => {
     if (!(err)) {
         console.log(`Server started...`)
-        console.log(`Go to ~ http://${HOSTNAME}:${PORT}`)
+        console.log(`Go to ~ http://${HOSTNAME}:${PORT}/${SLUG}`)
     }
 })

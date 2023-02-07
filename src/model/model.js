@@ -1,5 +1,5 @@
 const MONGOOSE = require("mongoose")
-const notesAppSchema = require("../schema/schema")
+const { notesAppSchema } = require("../schema/schema")
 
 const COLLECTION_NAME = "note"
 

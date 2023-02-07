@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EFEFEF;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.navBar {
+    background-color: #AF0171;
+    border-bottom: 2px solid #4C0033;
+    width: 100%;
+    height: fit-content;
+    padding: 3px;
+    margin-bottom: 3px;
+}
+
+.navBar .innerCont {
+    padding: 2px;
+    margin: 2px;
+}
+
+.navBar .innerCont h1 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #E80F88;
+    text-shadow: -2px 5px 2px #790252;
+}
+
+.formContainer {
+    padding: 3px;
+    margin: 1px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.formContainer form,
+.imgCont {
+    width: 50%;
+}
+
+.formContainer .imgCont {
+    padding: 2px;
+    margin: 1px;
+}
+
+.formContainer .imgCont div {
+    border: 2px solid white;
+    border-radius: 4px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px gray;
+}
+
+.formContainer .imgCont div img {
+    border-radius: 4px;
+}
+
+.formContainer form {
+    padding: 2px;
+}
+
+.formContainer form .boxContainer {
+    padding: 3px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.formContainer form .boxContainer label {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: black;
+    margin: 1px;
+    padding: 2px;
+}
+
+.formContainer form .boxContainer input {
+    outline: none;
+    background-color: #B7C4CF;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid #B7C4CF;
+    color: whitesmoke;
+    font-size: 0.9em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 500;
+}
+
+.formContainer form .boxContainer input::placeholder {
+    text-transform: capitalize;
+}
+
+.formContainer form .boxContainer button {
+    color: #4C0033;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 4px 5px;
+    text-transform: uppercase;
+    background-color: #E80F88;
+    border-radius: 4px;
+    border: 2px solid #E80F88;
+}
+
+.formContainer form .boxContainer button:hover {
+    box-shadow: 0 0 8px #bdbdbd, inset 0 0 8px #F9F9F9;
+    border: none;
+}
+
+.tag::before {
+    color: black;
+    content: "Karan Yadav 2023-inf";
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    font-family: monospace;
+    font-weight: 500;
+    text-transform: capitalize;
+    background: #efefef;
+    padding: 3px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.tag {
+    background-color: black;
+    width: 100%;
+    height: 1.4px;
+    position: absolute;
+    bottom: 30px;
+}
+
+@media (max-width: 500px) {
+    .formContainer {
+        flex-direction: column-reverse;
+    }
+
+    .formContainer form,
+    .imgCont {
+        width: 100%;
+    }
+}
+
+@media (max-height: 500px) {
+    .tag {
+        display: none;
+    }
+}

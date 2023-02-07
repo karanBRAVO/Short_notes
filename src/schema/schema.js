@@ -35,4 +35,19 @@ const notesAppSchema = new MONGOOSE.Schema({
     }
 })
 
-module.exports = notesAppSchema
+const authSchema = new MONGOOSE.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    userid: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    }
+})
+
+module.exports = { notesAppSchema, authSchema }
